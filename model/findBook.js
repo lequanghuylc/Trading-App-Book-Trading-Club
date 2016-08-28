@@ -1,5 +1,5 @@
 var connect = require('./db');
-var ObjectId = require('mongodb').ObjectId;
+var ObjectId = require('mongodb').ObjectID;
 var findUser = require('./findUser');
 
 module.exports = function(val, callback){

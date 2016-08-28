@@ -1,5 +1,5 @@
 var mongo = require("mongodb").MongoClient;
-var url = 'mongodb://'+process.env.IP+':27017/bookclub';
+var url = process.env.MONGODB_URI;
 
 module.exports = function(main){
     mongo.connect(url, function(err,db){

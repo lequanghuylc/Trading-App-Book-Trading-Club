@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var ObjectId = require('mongodb').ObjectId;
+var ObjectId = require('mongodb').ObjectID;
 var bodyParser = require("body-parser");
 
 // Require model
@@ -155,5 +155,5 @@ app.get('*', function (req, res){
    res.redirect("/");
 });
 
-
-app.listen(8080);
+var port = process.env.PORT || 8080;
+app.listen(port);
