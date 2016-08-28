@@ -64,7 +64,8 @@ var Header = React.createClass({
                     }
                 </ul>
                 {this.props.loggedIn === true ? "" :
-                    <form className="navbar-form navbar-right form-inline" role="search" onSubmit={this.handleForm} >
+                    <form className="navbar-form navbar-right form-inline" role="search" onSubmit={this.handleForm} 
+                    style={{display: this.props.showLoginForm === true ? "inline-block" : "none"}}>
                       <div className="form-group">
                         <span className="login-notify">{this.state.loginMessage}</span>
                         <input type="text" className="form-control" placeholder="Username" ref="username" onChange={this.formChange}/>

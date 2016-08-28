@@ -31,7 +31,7 @@ var Request = React.createClass({
     },
     render: function(){
         return (
-            <li className="request" style={this.props.status === "waiting" ? {} : {textDecoration: "line-through"}}>
+            <li className="request" style={this.props.status === "waiting" ? {} : {textDecoration: "line-through", opacity: 0.5}}>
             {this.props.from === this.props.username ? "You" : this.props.from} sent {this.props.to === this.props.username ? "You" : this.props.to} a trade request,  &nbsp;
             <a href={"https://tradingbook-quanghuyf.c9users.io/singlebook/?b="+this.props.fromBook} target="_blank">this book</a> &nbsp;
              for <a href={"https://tradingbook-quanghuyf.c9users.io/singlebook/?b="+this.props.toBook} target="_blank">this book</a>.

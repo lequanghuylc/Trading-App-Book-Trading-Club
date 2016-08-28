@@ -13,6 +13,7 @@ var BookClub = React.createClass({
         return({
             userData: {},
             loggedIn: false,
+            showLoginForm: false,
             webPage: 'loading',
             singleBookID: false
         });
@@ -22,7 +23,7 @@ var BookClub = React.createClass({
           if(data !== "false"){
               this.changeLogInStatus(data);
           } else {
-              this.setState({loggedIn: false});
+              this.setState({loggedIn: false, showLoginForm: true});
           }
         }.bind(this));
         switch(window.location.pathname){
@@ -58,7 +59,8 @@ var BookClub = React.createClass({
         data.username = val;
         this.setState({
             loggedIn: !boo,
-            userData: boo === false ? data : {}
+            userData: boo === false ? data : {},
+            showLoginForm: boo
         });
         $.get("/getuserbook/"+val, function(data){
                     var userData = this.state.userData;
@@ -76,6 +78,7 @@ var BookClub = React.createClass({
     logout: function(){
         this.setState({
             loggedIn: false,
+            showLoginForm: true,
             userData: {}
         });
         //clear all cookie
@@ -86,8 +89,8 @@ var BookClub = React.createClass({
         //clear all cookie
         document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
         //set new cookie
-        document.cookie = "user=" + username + ";";
-        document.cookie = "au=" + id + ";" ;
+        document.cookie = "user=" + username + "; path=/";
+        document.cookie = "au=" + id + "; path=/" ;
     },
     updateUser: function(val){
         val.username = this.state.userData.username;
@@ -138,7 +141,7 @@ var BookClub = React.createClass({
         return(
             <div>
             <Header loggedIn={this.state.loggedIn} username={this.state.userData.username === undefined ? "" : this.state.userData.username} 
-                action={this.webPage} changeStatus={this.changeLogInStatus} logout={this.logout} cookie={this.cookie}/>
+                showLoginForm={this.state.showLoginForm} action={this.webPage} changeStatus={this.changeLogInStatus} logout={this.logout} cookie={this.cookie}/>
             <main>
                 {generateWebpage}
             </main>
