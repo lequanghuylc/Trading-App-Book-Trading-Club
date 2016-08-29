@@ -69,7 +69,7 @@ app.post("/login",function(req,res){
     // check login
 app.get('/checklogin', function(req,res){
     console.log(JSON.stringify(cookie(req)));
-    if(!cookie(req).user){
+    if(!cookie(req).user || cookie(req).au == "undefined" || cookie(req).au.length !== 24){
         res.end("false");
     } else {
         var validateCookie = {
@@ -85,6 +85,7 @@ app.get('/checklogin', function(req,res){
     // get user data
 app.get("/getuserdata/:username", function(req,res){
    findUser({"username": req.params.username}, function(docs){
+        docs[0]._id = "can't tell";
        res.send(docs[0]);
    }) ;
 });
